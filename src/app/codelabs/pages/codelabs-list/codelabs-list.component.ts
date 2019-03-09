@@ -7,6 +7,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CodelabsListComponent implements OnInit {
 
+  codelabs = [
+    {
+      title: 'Angular Fundamentals',
+    },
+    {
+      title: 'NGRX',
+    }
+  ];
+
   constructor() { }
 
   ngOnInit() {
