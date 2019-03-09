@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { CodelabsService } from '@app/core/codelabs/codelabs.service';
+import { Codelab } from '@app/core/models/codelab.interface';
 
 @Component({
   selector: 'app-codelabs-list',
@@ -7,18 +9,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CodelabsListComponent implements OnInit {
 
-  codelabs = [
-    {
-      title: 'Angular Fundamentals',
-    },
-    {
-      title: 'NGRX',
-    }
-  ];
+  public codelabs: Array<Codelab>;
 
-  constructor() { }
+  constructor(private codelabsService: CodelabsService) { }
 
   ngOnInit() {
+    this.codelabsService.getCodelabs()
+      .subscribe(codelabs =>
+        this.codelabs = codelabs
+      );
   }
-
 }
