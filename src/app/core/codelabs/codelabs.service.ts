@@ -16,10 +16,51 @@ export class CodelabsService {
     return throwError(console.error('Some error occured', error));
   }
 
-  getCodelabs(): Observable<Array<Codelab>> {
+  public getCodelabs(): Observable<Array<Codelab>> {
     return this.apiService
       .get<Array<Codelab>>(environment.codelabsEndpoint)
       .pipe(
         map(response => response, catchError(this.handleError)));
+  }
+
+  public getCodelab(codelabId: string): Observable<Codelab> {
+    return this.apiService.get<Codelab>(`${environment.codelabsEndpoint}/codelab/${codelabId}`).pipe(
+      map(response => response, catchError(this.handleError))
+    );
+  }
+
+  public createCodelab(codelab: Codelab): Observable<Codelab> {
+    const {title, author, categories, duration, steps, level, practice} = codelab;
+    const newCodeLab = {
+      title,
+      author,
+      categories,
+      duration,
+      level,
+      date: Date.now().toString(),
+      practice,
+      steps,
+    };
+
+    return this.apiService.post(`${environment.codelabsEndpoint}/create`, newCodeLab);
+  }
+
+  public updateCodelab(codelab: Codelab): Observable<Codelab> {
+    const {title, author, categories, duration, steps, level, practice, _id} = codelab;
+    const newCodeLab = {
+      title,
+      author,
+      categories,
+      duration,
+      level,
+      date: Date.now().toString(),
+      practice,
+      steps,
+    };
+    return this.apiService.patch(`${environment.codelabsEndpoint}/edit?codelabId=${_id}`, newCodeLab, {_id});
+  }
+
+  public deleteCodelab(codelabId: String): Observable<Codelab> {
+    return this.apiService.delete(`${environment.codelabsEndpoint}/delete?codelabId=${codelabId}`);
   }
 }

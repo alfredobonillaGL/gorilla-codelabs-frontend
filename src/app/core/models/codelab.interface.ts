@@ -1,4 +1,5 @@
 export interface Codelab  {
+  readonly _id: string;
   readonly title: string;
   readonly author: string;
   readonly categories: string[];

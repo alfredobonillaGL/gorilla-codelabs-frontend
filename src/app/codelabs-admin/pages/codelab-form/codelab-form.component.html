@@ -1,0 +1,41 @@
+<div class="container form-container">
+  <h2>Create Codelab</h2>
+  <div class="row">
+    <div class="col-4">
+      <form [formGroup]="codelabForm">
+        <div class="form-group">
+          <label class="col-form-label" for="title">Title</label>
+          <input formControlName="title" type="text" class="form-control" placeholder="Title" id="title">
+        </div>
+
+        <div class="form-group">
+          <label class="col-form-label" for="categories">Categories</label>
+          <input formControlName="categories" type="text" class="form-control" placeholder="web, backend, frontend" id="categories">
+        </div>
+
+        <div class="form-group">
+          <label class="col-form-label" for="duration">Duration (in minutes)</label>
+          <input formControlName="duration" type="text" class="form-control" placeholder="60" id="duraiton">
+        </div>
+
+        <div class="form-group">
+            <label class="col-form-label" for="practice">Practice</label>
+          <select formControlName="practice" class="custom-select" id="practice">
+            <option selected="">Choose practice</option>
+            <option value="web">web</option>
+            <option value="backend">backend</option>
+            <option value="mobile">mobile</option>
+            <option value="security">security</option>
+            <option value="devops">devops</option>
+          </select>
+        </div>
+    
+        <button  (click)="submitCodelab()" type="button" class="btn btn-primary">Submit</button>
+      
+      </form>     
+    </div>
+  </div>
+</div>
+
+
+

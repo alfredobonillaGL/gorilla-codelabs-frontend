@@ -49,20 +49,22 @@ export class ApiService {
   /**
    * http PUT wrapper method
    * @param url -  the service url
+   * @param body - the request body
    * @param params - the params to send with request
    */
-  public put<T>(url: string, params: {}, sendAsJSON: boolean = false): Observable<T> {
-    return this.http.put<T>(url, sendAsJSON ? params : this.getHttpParams(params));
+  public put<T>(url: string, body: {}, params: {}, sendAsJSON: boolean = false): Observable<T> {
+    return this.http.put<T>(url, body, sendAsJSON ? params : this.getHttpParams(params));
   }
 
   /**
    * http PATCH wrapper method
    * @param url -  the service url
+   * @param body - the request body
    * @param params - the params to send with request
    * @param sendAsJSON - true to send params as JSON (opposite as default)
    */
-  public patch<T>(url: string, params: {}, sendAsJSON: boolean = false): Observable<T> {
-    return this.http.patch<T>(url, sendAsJSON ? params : this.getHttpParams(params));
+  public patch<T>(url: string, body: {}, params: {}, sendAsJSON: boolean = false): Observable<T> {
+    return this.http.patch<T>(url, body, sendAsJSON ? params : this.getHttpParams(params));
   }
 
   /**

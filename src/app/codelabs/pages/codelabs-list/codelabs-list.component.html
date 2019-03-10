@@ -5,8 +5,9 @@
 </div>
 <div class="row">
   <div class="col-12 codelab-list">
-      <app-codelab-item *ngFor="let codelab of codelabs"></app-codelab-item>
+    <div  *ngFor="let codelab of codelabs">
+        <app-codelab-item [codelab]="codelab" ></app-codelab-item>
+    </div>
   </div>
-
 </div>
 
