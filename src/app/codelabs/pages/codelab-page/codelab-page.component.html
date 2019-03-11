@@ -1,3 +1,13 @@
-<p>
-  codelab-page works!
-</p>
+<div class="container">
+  <div class="row">
+    <div *ngIf="codelab" class="col-12">
+        <h2>{{codelab.title}}</h2>
+        <h4>{{codelab.author}}</h4>
+        <h5>Description: </h5>
+        <p>{{codelab.description}}</p>
+    </div>
+  </div>
+</div>
+
+
+

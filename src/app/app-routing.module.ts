@@ -5,11 +5,16 @@ import { CodelabsAdminModule } from './codelabs-admin/codelabs-admin.module';
 import { CodelabsListComponent } from './codelabs/pages/codelabs-list/codelabs-list.component';
 import { CodelabFormComponent } from '@app/codelabs-admin/pages/codelab-form/codelab-form.component';
 import { CodelabAdminListComponent } from '@app/codelabs-admin/pages/codelab-admin-list/codelab-admin-list.component';
+import { CodelabPageComponent } from './codelabs/pages/codelab-page/codelab-page.component';
 
 const routes: Routes = [
   {
     path: '',
     component: CodelabsListComponent
+  },
+  {
+    path: 'codelab/:id',
+    component: CodelabPageComponent
   },
   {
     path: 'admin',

@@ -43,6 +43,7 @@ export class CodelabFormComponent implements OnInit {
       date_posted: [''],
       practice: [''],
       steps: [''],
+      description: ['']
     };
     if (codelab) {
       Object.keys(form).forEach(key => form[key] = [codelab[key]]);

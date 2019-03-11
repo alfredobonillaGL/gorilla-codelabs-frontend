@@ -46,7 +46,16 @@ export class CodelabsService {
   }
 
   public updateCodelab(codelab: Codelab): Observable<Codelab> {
-    const {title, author, categories, duration, steps, level, practice, _id} = codelab;
+    const {
+      title,
+      author,
+      categories,
+      duration,
+      steps,
+      level,
+      practice,
+      description,
+      _id } = codelab;
     const newCodeLab = {
       title,
       author,
@@ -56,6 +65,7 @@ export class CodelabsService {
       date: Date.now().toString(),
       practice,
       steps,
+      description
     };
     return this.apiService.patch(`${environment.codelabsEndpoint}/edit?codelabId=${_id}`, newCodeLab, {_id});
   }

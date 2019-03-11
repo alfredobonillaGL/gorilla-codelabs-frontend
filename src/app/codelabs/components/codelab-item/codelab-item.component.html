@@ -1,7 +1,8 @@
 <div class="card border-primary mb-3 codelab-item" style="max-width: 20rem;">
-    <div class="card-header">{{codelab.title}}</div>
+    <div class="card-header">{{codelab.author}}</div>
     <div class="card-body">
-      <h4 class="card-title">Primary card title</h4>
-      <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+      <h4 class="card-title">{{codelab.title}}</h4>
+      <p class="card-text">{{codelab.description}}</p>
     </div>
+    <a class="btn btn-primary btn-sm" [routerLink]="['/codelab/', codelab._id]">Go to codelab</a>
   </div>

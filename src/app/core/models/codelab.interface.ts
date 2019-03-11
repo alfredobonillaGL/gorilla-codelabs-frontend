@@ -7,6 +7,7 @@ export interface Codelab  {
   readonly level: string;
   readonly date_posted: string;
   readonly practice: string;
+  readonly description: string;
   readonly steps: Step[];
 }
 
