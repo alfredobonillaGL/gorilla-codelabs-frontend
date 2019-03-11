@@ -16,4 +16,3 @@ export interface Step {
   readonly stepNumber: number;
   readonly body: string;
 }
-

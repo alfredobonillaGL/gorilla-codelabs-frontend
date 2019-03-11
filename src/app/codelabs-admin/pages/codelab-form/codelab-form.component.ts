@@ -1,8 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { CodelabsService } from '@app/core/codelabs/codelabs.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Codelab } from '@app/core/models/codelab.interface';
+import { Store, select } from '@ngrx/store';
+import { State } from '@app/core/models/state.interface';
+import { getCodelabById } from '@app/core/store/selectors';
+import { GetCodelabs, UpdateCodelab, CreateCodelab } from '@app/core/store/actions/codelabs.actions';
 
 @Component({
   selector: 'app-codelab-form',
@@ -17,20 +20,26 @@ export class CodelabFormComponent implements OnInit {
 
   constructor(
     private formBuilder: FormBuilder,
-    private codelabsService: CodelabsService,
+    private store: Store<State>,
     private route: ActivatedRoute,
     private router: Router
   ) { }
 
   public ngOnInit(): void {
     this.codelabId = this.route.snapshot.paramMap.get('id');
-    this.codelabForm = this.generateCodelabForm();
     if (this.codelabId) {
-      this.codelabsService.getCodelab(this.codelabId).subscribe(codelab => {
-        this.codelab = codelab;
-        this.codelabForm = this.generateCodelabForm(codelab);
-      });
+      this.store.dispatch(new GetCodelabs());
+      this.getCodelab();
+    } else {
+      this.codelabForm = this.generateCodelabForm();
     }
+  }
+
+  public getCodelab() {
+    this.store.pipe(select(getCodelabById, this.codelabId)).subscribe(codelab => {
+      this.codelab = codelab;
+      this.codelabForm = this.generateCodelabForm(this.codelab);
+    });
   }
 
   public generateCodelabForm(codelab: Codelab = null): FormGroup {
@@ -55,15 +64,10 @@ export class CodelabFormComponent implements OnInit {
     const codelab = this.codelabForm.value;
     if (this.codelab) {
       codelab._id = this.codelabId;
-      console.log('edied codelab', codelab);
-      this.codelabsService.updateCodelab(codelab).subscribe(res => this.goBackToAdmin());
+      this.store.dispatch(new UpdateCodelab(codelab));
     } else {
-      this.codelabsService.createCodelab(codelab).subscribe(res => this.goBackToAdmin());
+      this.store.dispatch(new CreateCodelab(codelab));
     }
-  }
-
-  private goBackToAdmin(): void {
-    this.router.navigate(['/admin']);
   }
 }
 
